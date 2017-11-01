@@ -1,0 +1,15 @@
+The \fBRMIRROR\fP target will clone a packet and encapsulate the clone in a GRE 
+transparent ethernet header, the encapsulated clone will then be sent to a 
+destination machine.
+.TP
+\fB\-\-target\fp \fIipaddr\fp
+Send the new GRE encapsulated packet to the host reachable at the given IP
+address.
+.TP
+\fB\-\-len\fp \fIBytes\fp
+Trim the GRE packet down to \fIBytes\fp after the GRE header, total packet
+size will be 14 (MAC) + 20 (IP) + 4 (GRE) + \fIBytes\fp
+.PP
+To duplicate all local outgoing traffic to another system:
+.PP
+\-A OUTPUT \-j RMIRROR \-\-target 192.168.1.101

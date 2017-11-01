@@ -1,0 +1,7 @@
+# Installing
+A sample dkms.conf is provided that will probably work for most systems
+Install using DKMS procedure, 
+ 1. sudo cp -R ./ /usr/src/xt_rmirror-1
+ 2. sudo dkms add -m xt_rmirror -v 1
+ 3. sudo dkms build -m xt_rmirror -v 1
+ 4. sudo dkms install -m xt_rmirror -v 1
