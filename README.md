@@ -31,21 +31,28 @@ iptables-dev or iptables-devel (depending on linux distro) is required to compil
  * test by running iptables -j RMIRROR -h, you will see a help message for the RMIRROR target at the bottom of the output
 
 # Running
-To view counters for rules: 'sudo iptables -L -v'
+To view counters for rules: 
+
+    sudo iptables -L -v
 
 To catch all traffic coming into your system:
+
     sudo iptables -I INPUT -j RMIRROR --target <rmirrorip>
 
 To trim the packet to 60 Bytes:
+
     sudo iptables -I INPUT -j RMIRROR --target <rmirrorip> --len <bytes>
 
 To catch packets coming from a specific source IP:
+
     sudo iptables -I INPUT -s <sourceip> -j RMIRROR --target <rmirrorip>
 
 To catch packets outgoing to a specific IP:
+
     sudo iptables -I OUTPUT -d <destip> -j RMIRROR --target <rmirrorip>
 
 To catch packets coming from a specific MAC address:
+
     sudo iptables -I INPUT -m mac --mac-source <macaddress> -j RMIRROR --target <rmirrorip>
 
 MAC address is formatted as AA:BB:CC:DD:EE:FF
@@ -58,9 +65,11 @@ rmirrorip is the IP address of the system you want to send GRE encapsulated traf
 Goal is to reduce packet size for all regular traffic, and allow an exception for GRE traffic
 
 set the MTU for interfaces to 1400 with:
+
     sudo ifconfig eth0 mtu 1400
 
 Add an exception for the route to the GRE destination with:
+
     sudo ip route to <gre target IP> dev <eth dev> mtu 1492
  - Add this rule for each interface that can reach the gre destination
 
