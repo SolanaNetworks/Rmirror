@@ -1,10 +1,14 @@
 # RMIRROR
-Rmirror implements a Linux kernel module that mirrors traffic received 
-and transmitted by the host to a GRE tunnel. The solution uses Transparent 
-Ethernet Bridging. Implementation as an iptables rule allows for easy 
-configuration and filtering of the traffic to mirror without changing 
-the original traffic. Packets are encapsulated in the GRE Tunnel and sent
-to the specified destination IP addess. Rmirror is developed by Solana Networks.
+Rmirror is a Linux kernel module and iptables extension that mirrors 
+traffic over a GRE tunnel. By implementing a new iptables RMIRROR target, 
+the traffic can easily be configured and filtered for the mirror
+without changing the original traffic.
+
+Packets are then encapsulated in the GRE Tunnel and sent to a specified
+destination IP addess. Rmirror is similar in behavior to Cisco's ERSPAN
+capability but mirrors traffic throught Transparent Ethernet Bridging.
+
+Rmirror is developed by Solana Networks. 
 Thanks to ExtraHop for sponsoring this effort.
 
 # Installing
