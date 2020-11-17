@@ -182,8 +182,11 @@ unsigned int rmirror_tg4(
 	nf_reset(skb);
 	nf_ct_set(skb, nf_ct_untracked_get(), IP_CT_NEW);
 	nf_conntrack_get(skb_nfct(skb));
-#else //version 4.12 and up
+#elif LINUX_VERSION_CODE < KERNEL_VERSION(5,4,0) //version 4.12 to 5.3
         nf_reset(skb);
+        nf_ct_set(skb, NULL, IP_CT_UNTRACKED);
+#else //version 5.4 and up
+        nf_reset_ct(skb);
         nf_ct_set(skb, NULL, IP_CT_UNTRACKED);
 #endif //LINUX VERSION CODE
 #endif //WITH CONNTRACK
@@ -266,5 +269,5 @@ MODULE_ALIAS("ipt_RMIRROR");
 
 MODULE_AUTHOR("Colin Zeidler, czeidler@solananetworks.com");
 MODULE_DESCRIPTION("Xtables: clone and send packet with GRE");
-MODULE_LICENSE("GPL")
+MODULE_LICENSE("GPL");
 
